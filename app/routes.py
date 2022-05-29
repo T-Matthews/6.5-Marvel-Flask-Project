@@ -1,4 +1,4 @@
-from flask_login import login_required
+from flask_login import login_required,current_user
 from app import app
 from flask import render_template
 import requests as r
@@ -8,8 +8,9 @@ import requests as r
 
 @app.route('/')
 def home():
-    greeting = 'Hello Foxes'
-    return render_template('index.html',greeting = greeting)
+    if current_user:
+        print(current_user)
+    return render_template('index.html')
 
 @app.route('/about')
 def about():    

@@ -17,9 +17,10 @@ def login():
     if request.method =='POST':
         if lform.validate_on_submit():
             user=User.query.filter_by(username=lform.username.data).first()
-            if user and check_password_hash(user.password, lform.password.data).first():
+            print(user)
+            if user and check_password_hash(user.password, lform.password.data):
                 login_user(user)
-                flash(f'Successful Login for user {user.username}','success')
+                flash(f'Successful Login for user {user.username}',category='success')
             return redirect((url_for('home')))
         flash('Incorrect username or password, please try again.','danger')
         return redirect(url_for('auth.login'))

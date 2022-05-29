@@ -31,3 +31,28 @@ class User(db.Model, UserMixin):
         self.last_name = last_name.title()
         self.id = str(uuid4())#UUID is a UUID object, not string. Need to convert.
         self.password = generate_password_hash(password)
+
+class Hero(db.Model):
+    id =db.Column(db.String(40), primary_key=True)
+    name = db.Column(db.String(40), nullable=False)
+    description = db.Column(db.String(300))
+    image=db.Column(db.String(150))
+    api_id=db.Column(db.String(500))
+
+    def __init__(self,dict):
+        self.id=str(uuid4())
+        self.name=dict['name'].title()
+        self.description = dict['description']
+        self.image=dict.get('image')
+        self.api_id=dict['api_id']
+
+
+    #write a function to translate this object to a dictionary for jsonification
+    def to_dict(self):
+        return {
+            'id':self.id,
+            'name':self.name,
+            'description':self.description,
+            'image':self.image,
+            'api_id':self.api_id
+        }
