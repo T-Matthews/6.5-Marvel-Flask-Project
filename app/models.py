@@ -36,10 +36,11 @@ class User(db.Model, UserMixin):
 
 class Hero(db.Model):
     id =db.Column(db.String(40), primary_key=True)
-    name = db.Column(db.String(40), nullable=False)
-    description = db.Column(db.String(400))
+    name = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.String(600))
     image=db.Column(db.String(150))
     api_id=db.Column(db.Integer)
+    quantity = db.Column(db.Integer)
     userid = db.Column(db.String(80),db.ForeignKey('user.id'))
 
     def __init__(self,dict,userid):
@@ -48,6 +49,7 @@ class Hero(db.Model):
         self.description = dict['description']
         self.image=dict.get('image')
         self.api_id=dict['api_id']
+        self.quantity = 5
         self.userid = userid
 
 

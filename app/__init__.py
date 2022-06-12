@@ -4,8 +4,10 @@ from config import Config
 from .models import db, login
 from .auth.routes import auth #import blueprint auth
 from .api.routes import api
+from flask_cors import CORS
 app = Flask(__name__)
 app.config.from_object(Config)
+CORS(app,origins=['*'])
 
 db.init_app(app)
 

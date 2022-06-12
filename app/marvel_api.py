@@ -19,8 +19,8 @@ from datetime import datetime
 
 
 timestamp = datetime.now().strftime('%Y-%m-%d%H:%M:%S')
-pub_key = #copy from .env
-priv_key = #copy from .env
+pub_key = 'a04e50bf6e1c9cb8ffce7c7abcb34d32'
+priv_key = 'see .env'
 
 
 def hash_params():
@@ -30,17 +30,17 @@ def hash_params():
     return hashed_params
 
 
-params = {'ts': timestamp, 'apikey': pub_key, 'hash': hash_params(),'limit':100,'offset':100
+params = {'ts': timestamp, 'apikey': pub_key, 'hash': hash_params(),'limit':100,'offset':1500
 }
 results = get('https://gateway.marvel.com:443/v1/public/characters', params=params)
 newdict={}
 data = results.json()
 print(data['status'])
 for hero in data['data']['results']:
-    if len(hero['name']) > 39:
+    if len(hero['name']) > 49:
         print(hero['name'])
         continue
-    if len(hero['description']) >400:
+    if len(hero['description']) >600:
         print (hero['name']+": \n"+hero['description'])
         continue
     
